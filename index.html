@@ -5,18 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Latin Declensions Quiz</title>
     <style>
-        @font-face {
-                  font-family: 'Muni';
-                  src: url('muni-bold.woff') format('woff');
-                  font-weight: bold;
-                  font-style: normal;
-                }
         body {
             font-family: Arial, sans-serif;
-            color: #000 ; /* Default text color */
+            color: #000; /* Default text color */
         }
 
-        h1 {font-family: 'Muni', Arial, sans-serif;
+        h1 {
             color: #f01928; /* Heading color */
         }
 
@@ -37,9 +31,10 @@
     <label><input type="checkbox" class="declensionCheckbox" value="V"> Declinatio V</label><br>
 
     <h2>Select the weeks you want to practice:</h2>
-    <label><input type="checkbox" class="weekCheckbox" value="Week 1"> Week 1</label><br>
-    <label><input type="checkbox" class="weekCheckbox" value="Week 2"> Week 2</label><br>
-    <label><input type="checkbox" class="weekCheckbox" value="Week 3"> Week 3</label><br>
+    <label><input type="checkbox" class="weekCheckbox" value="week1">week1</label><br>
+    <label><input type="checkbox" class="weekCheckbox" value="week2">week2</label><br>
+    <label><input type="checkbox" class="weekCheckbox" value="week3">week3</label><br>
+
 
     <button onclick="startQuiz()">Start Quiz</button>
 
@@ -52,10 +47,11 @@
     </div>
 
     <script>
-        let wordsData = [];  // Empty list to store words loaded from weeks
+        let wordsData = []; // To store words loaded from weeks
         const cases = ['Nominative', 'Genitive'];
         const numbers = ['Singular', 'Plural'];
-        var selectedDeclensions = [];
+        let selectedDeclensions = [];
+        let currentWord, currentCase, currentNumber;
 
         function startQuiz() {
             selectedDeclensions = getSelectedDeclensions();
@@ -90,14 +86,34 @@
             let loadedFiles = 0;
 
             weeks.forEach(week => {
-                fetch(week.toLowerCase() + '.txt')  // Assuming Week files are named as "week1.txt"
-                    .then(response => response.text())
+                const weekFile = week.replace(" ", "").toLowerCase() + '.txt';
+                console.log("Fetching file:", weekFile); // Log the file being fetched
+                fetch(weekFile)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.text();
+                    })
                     .then(data => {
-                        data.split('\n').forEach(line => {
-                            const [word, genitive, gender] = line.split(',');
-                            wordsData.push({ word: word.trim(), genitive: genitive.trim(), gender: gender.trim() });
+                        data.split('\n').forEach((line, index) => {
+                            line = line.trim(); // Trim whitespace
+                            if (line === '') return; // Skip empty lines
+
+                            const parts = line.split(',');
+                            // Log the line to see what we are getting
+                            console.log(`Line ${index + 1}: ${line}`); // Log the raw line
+
+                            // Check if the parts array has exactly 3 elements
+                            if (parts.length === 3) {
+                                const [word, genitive, gender] = parts.map(part => part.trim());
+                                wordsData.push({ word, genitive, gender });
+                            } else {
+                                console.warn(`Invalid line format at line ${index + 1} in ${weekFile}:`, parts); // Log invalid lines with their parts
+                            }
                         });
                         if (++loadedFiles === weeks.length) callback();
+                    })
+                    .catch(error => {
+                        console.error('Error fetching week data:', error);  // Log errors in fetching
                     });
             });
         }
@@ -135,12 +151,12 @@
         }
 
         function determineDeclension(word) {
-            if (word.genitive.endsWith("ei") && (word.gender === "f")) return "V"
+            if (word.genitive.endsWith("ei") && (word.gender === "f")) return "V";
             if (word.genitive.endsWith("ae")) return "I";
             if (word.genitive.endsWith("i")) return "II";
             if (word.genitive.endsWith("is")) return "III";
             if (word.genitive.endsWith("us")) return "IV";
-            ;
+            return ''; // Return an empty string if no declension is found
         }
 
         function checkGuess() {
@@ -167,7 +183,6 @@
         function getRandomElement(array) {
             return array[Math.floor(Math.random() * array.length)];
         }
-
     </script>
 </body>
 </html>
