@@ -91,30 +91,31 @@
         
             weeks.forEach(week => {
                 const weekFile = week.replace(' ', '').toLowerCase() + '.txt';
-                console.log("Fetching file:", weekFile);
+                console.log("Fetching file:", weekFile); // Log the file being fetched
                 fetch(weekFile)
                     .then(response => {
                         if (!response.ok) throw new Error('Network response was not ok');
                         return response.text();
                     })
                     .then(data => {
-                        data.split('\n').forEach(line => {
+                        data.split('\n').forEach((line, index) => {
                             const parts = line.split(',');
                             // Check if the parts array has exactly 3 elements
                             if (parts.length === 3) {
                                 const [word, genitive, gender] = parts.map(part => part.trim());
                                 wordsData.push({ word, genitive, gender });
                             } else {
-                                console.warn('Invalid line format:', line); // Log invalid lines
+                                console.warn(`Invalid line format at line ${index + 1} in ${weekFile}:`, line); // Log invalid lines with their line number
                             }
                         });
                         if (++loadedFiles === weeks.length) callback();
                     })
                     .catch(error => {
-                        console.error('Error fetching week data:', error);
+                        console.error('Error fetching week data:', error);  // Log errors in fetching
                     });
             });
         }
+
 
 
 
