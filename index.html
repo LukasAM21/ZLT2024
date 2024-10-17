@@ -90,7 +90,7 @@
             let loadedFiles = 0;
 
             weeks.forEach(week => {
-                fetch(week.toLowerCase() + '.txt')  // Assuming Week files are named as "week1.txt"
+                fetch(week.replace(' ', '').toLowerCase() + '.txt')  // Fetch the correct file based on the week
                     .then(response => response.text())
                     .then(data => {
                         data.split('\n').forEach(line => {
@@ -98,7 +98,8 @@
                             wordsData.push({ word: word.trim(), genitive: genitive.trim(), gender: gender.trim() });
                         });
                         if (++loadedFiles === weeks.length) callback();
-                    });
+                    })
+                    .catch(error => console.error('Error loading week data:', error));  // Log errors for easier debugging
             });
         }
 
