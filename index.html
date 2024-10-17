@@ -84,7 +84,7 @@
             let loadedFiles = 0;
 
             weeks.forEach(week => {
-                const weekFile = week.replace(' ', '').toLowerCase() + '.txt';
+                const weekFile = week.replace(" ", "").toLowerCase() + '.txt';
                 console.log("Fetching file:", weekFile); // Log the file being fetched
                 fetch(weekFile)
                     .then(response => {
