@@ -99,7 +99,13 @@
                     })
                     .then(data => {
                         data.split('\n').forEach((line, index) => {
+                            line = line.trim(); // Trim whitespace
+                            if (line === '') return; // Skip empty lines
+        
                             const parts = line.split(',');
+                            // Log the parts to see what we are getting
+                            console.log(`Line ${index + 1}:`, parts); // Log each line's parts
+        
                             // Check if the parts array has exactly 3 elements
                             if (parts.length === 3) {
                                 const [word, genitive, gender] = parts.map(part => part.trim());
@@ -115,6 +121,7 @@
                     });
             });
         }
+
 
 
 
