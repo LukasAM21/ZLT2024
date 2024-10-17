@@ -88,20 +88,30 @@
         function loadWeekData(weeks, callback) {
             wordsData = [];
             let loadedFiles = 0;
+            console.log("Selected weeks:", weeks);  // Log selected weeks for debugging
 
             weeks.forEach(week => {
-                fetch(week.replace(' ', '').toLowerCase() + '.txt')  // Fetch the correct file based on the week
-                    .then(response => response.text())
+                const weekFile = week.replace(' ', '').toLowerCase() + '.txt';
+                console.log("Fetching file:", weekFile);  // Log the file name before fetching
+                fetch(weekFile)
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response was not ok');
+                        return response.text();
+                    })
                     .then(data => {
+                        console.log("Fetched data:", data);  // Log fetched data for debugging
                         data.split('\n').forEach(line => {
                             const [word, genitive, gender] = line.split(',');
                             wordsData.push({ word: word.trim(), genitive: genitive.trim(), gender: gender.trim() });
                         });
                         if (++loadedFiles === weeks.length) callback();
                     })
-                    .catch(error => console.error('Error loading week data:', error));  // Log errors for easier debugging
+                    .catch(error => {
+                        console.error('Error fetching week data:', error);  // Log any fetch errors
+                    });
             });
         }
+
 
         function getRandomWordAndCase() {
             clearInputField();
