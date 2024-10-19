@@ -40,6 +40,8 @@
     <label><input type="checkbox" class="weekCheckbox" value="week1">Týden 1</label><br>
     <label><input type="checkbox" class="weekCheckbox" value="week2">Týden 2</label><br>
     <label><input type="checkbox" class="weekCheckbox" value="week3">Týden 3</label><br>
+    <label><input type="checkbox" class="weekCheckbox" value="week4">Týden 4</label><br>
+
 
 
     <button onclick="startQuiz()">Spusti kvíz</button>
@@ -52,7 +54,7 @@
         <button onclick="submitGuess()">Vložit</button>
     </div>
 
-    <p>Last update code: 15:47</p>
+    <p>Last update: 19.10.2024 16:05</p>
 
     <script>
         function endsWithTwoConsonants(word) {
@@ -223,6 +225,8 @@
                 } else if (determineDeclension(currentWord) === "III"){
                     if (currentNumber === 'Singular'){
                         correctForm = currentWord.genitive
+                    } else if (currentWord.word === "vas"){
+                        correctForm = "vasorum";
                     } else if (isIStem(currentWord.word) || currentWord.word.endsWith("sis")){
                             correctForm = trunk + 'ium';
                         } else if (endsWithTwoConsonants(trunk) || currentWord.word === trunk + "is"){
