@@ -52,7 +52,7 @@
         <button onclick="submitGuess()">Vložit</button>
     </div>
 
-    <p>Last update code: 15:42</p>
+    <p>Last update code: 15:47</p>
 
     <script>
         function endsWithTwoConsonants(word) {
@@ -207,8 +207,7 @@
                 } else if (determineDeclension(currentWord) === "III"){
                     if (currentNumber === 'Singular'){
                         correctForm = currentWord.word
-                    }
-                    if (isIStem(currentWord.word)){
+                    } else if (isIStem(currentWord.word)){
                             correctForm = trunk + "ia";
                         } else if (currentWord.gender === "n") {correctForm = trunk + "a"
                         } else {correctForm = trunk + "es"}
@@ -224,8 +223,7 @@
                 } else if (determineDeclension(currentWord) === "III"){
                     if (currentNumber === 'Singular'){
                         correctForm = currentWord.genitive
-                    }
-                    if (isIStem(currentWord.word) || currentWord.word.endsWith("sis")){
+                    } else if (isIStem(currentWord.word) || currentWord.word.endsWith("sis")){
                             correctForm = trunk + 'ium';
                         } else if (endsWithTwoConsonants(trunk) || currentWord.word === trunk + "is"){
                             correctForm = trunk + 'ium';
