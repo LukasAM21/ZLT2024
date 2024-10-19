@@ -42,17 +42,17 @@
     <label><input type="checkbox" class="weekCheckbox" value="week3">Týden 3</label><br>
 
 
-    <button onclick="startQuiz()">Start Quiz</button>
+    <button onclick="startQuiz()">Spusti kvíz</button>
 
     <div id="quizContainer" style="display: none;">
         <p id="randomWord"></p>
         <p id="randomCaseNumber"></p>
-        <label for="userGuess">Your guess:</label>
+        <label for="userGuess">Odpověď:</label>
         <input type="text" id="userGuess" onkeydown="handleKeyDown(event)">
-        <button onclick="submitGuess()">Submit</button>
+        <button onclick="submitGuess()">Vložit</button>
     </div>
 
-    <p>Last update code: 15:06</p>
+    <p>Last update code: 15:12</p>
 
     <script>
         function handleKeyDown(event) {
