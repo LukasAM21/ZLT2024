@@ -46,7 +46,17 @@
         <button onclick="submitGuess()">Submit</button>
     </div>
 
+    <p>Last update code: 15:02</p>
+
     <script>
+        function handleKeyDown(event) {
+                // Check if the pressed key is Enter (key code 13)
+                if (event.keyCode === 13) {
+                    // Call the function to submit the guess
+                    submitGuess();
+                }
+            }
+        
         let wordsData = []; // To store words loaded from weeks
         const cases = ['Nominative', 'Genitive'];
         const numbers = ['Singular', 'Plural'];
