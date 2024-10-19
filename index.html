@@ -52,7 +52,7 @@
         <button onclick="submitGuess()">Vložit</button>
     </div>
 
-    <p>Last update code: 15:12</p>
+    <p>Last update code: 15:27</p>
 
     <script>
         function handleKeyDown(event) {
@@ -181,14 +181,31 @@
                 trunk = currentWord.genitive.slice(0, -1);
             }
             let correctForm = '';
-
+            // (currentWord.gender === 'n' ? 'a' : 'i')
             // Add logic for Nominative and Genitive
             if (currentCase === 'Nominative') {
+                if (determineDeclension(currentWord.word) === "I"){
+                correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "ae";
+                } else if (determineDeclension(currentWord.word) === "II"){
                 correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + (currentWord.gender === 'n' ? 'a' : 'i');
+                } else if (determineDeclension(currentWord.word) === "III"){
+                correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + (currentWord.gender === 'n' ? 'a' : 'es');
+                } else if (determineDeclension(currentWord.word) === "IV"){
+                correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + (currentWord.gender === 'n' ? 'ua' : 'us');
+                } else {correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "es";
+                       }
             } else if (currentCase === 'Genitive') {
-                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + (currentWord.gender === 'n' ? 'orum' : 'arum');
+                if (determineDeclension(currentWord.word) === "I"){
+                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "arum";
+                } else if (determineDeclension(currentWord.word) === "II"){
+                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "orum";
+                } else if (determineDeclension(currentWord.word) === "III"){
+                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "????????";
+                } else if (determineDeclension(currentWord.word) === "IV"){
+                correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "uum";
+                } else {correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "erum";
+                       }
             }
-
             return correctForm.toLowerCase();
         }
 
