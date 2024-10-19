@@ -52,7 +52,7 @@
         <button onclick="submitGuess()">Vložit</button>
     </div>
 
-    <p>Last update code: 15:36</p>
+    <p>Last update code: 15:42</p>
 
     <script>
         function endsWithTwoConsonants(word) {
@@ -200,11 +200,11 @@
             // (currentWord.gender === 'n' ? 'a' : 'i')
             // Add logic for Nominative and Genitive
             if (currentCase === 'Nominative') {
-                if (determineDeclension(currentWord.word) === "I"){
+                if (determineDeclension(currentWord) === "I"){
                 correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "ae";
-                } else if (determineDeclension(currentWord.word) === "II"){
+                } else if (determineDeclension(currentWord) === "II"){
                 correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + (currentWord.gender === 'n' ? 'a' : 'i');
-                } else if (determineDeclension(currentWord.word) === "III"){
+                } else if (determineDeclension(currentWord) === "III"){
                     if (currentNumber === 'Singular'){
                         correctForm = currentWord.word
                     }
@@ -212,16 +212,16 @@
                             correctForm = trunk + "ia";
                         } else if (currentWord.gender === "n") {correctForm = trunk + "a"
                         } else {correctForm = trunk + "es"}
-                } else if (determineDeclension(currentWord.word) === "IV"){
+                } else if (determineDeclension(currentWord) === "IV"){
                 correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + (currentWord.gender === 'n' ? 'ua' : 'us');
                 } else {correctForm = currentNumber === 'Singular' ? currentWord.word : trunk + "es";
                        }
             } else if (currentCase === 'Genitive') {
-                if (determineDeclension(currentWord.word) === "I"){
+                if (determineDeclension(currentWord) === "I"){
                 correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "arum";
-                } else if (determineDeclension(currentWord.word) === "II"){
+                } else if (determineDeclension(currentWord) === "II"){
                 correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "orum";
-                } else if (determineDeclension(currentWord.word) === "III"){
+                } else if (determineDeclension(currentWord) === "III"){
                     if (currentNumber === 'Singular'){
                         correctForm = currentWord.genitive
                     }
@@ -230,7 +230,7 @@
                         } else if (endsWithTwoConsonants(trunk) || currentWord.word === trunk + "is"){
                             correctForm = trunk + 'ium';
                         } else {correctForm = trunk + 'um'}
-                } else if (determineDeclension(currentWord.word) === "IV"){
+                } else if (determineDeclension(currentWord) === "IV"){
                 correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "uum";
                 } else {correctForm = currentNumber === 'Singular' ? currentWord.genitive : trunk + "erum";
                        }
