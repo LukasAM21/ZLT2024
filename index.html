@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Latin Declensions Quiz</title>
+    <title>Latinský kvíz</title>
     <style>
+        @font-face {
+                  font-family: 'Muni';
+                  src: url('muni-bold.woff') format('woff');
+                  font-weight: bold;
+                  font-style: normal;
+                }
         body {
             font-family: Arial, sans-serif;
-            color: #000; /* Default text color */
+            color: #000 ; /* Default text color */
         }
 
-        h1 {
+        h1 {font-family: 'Muni', Arial, sans-serif;
             color: #f01928; /* Heading color */
         }
 
@@ -20,8 +26,8 @@
     </style>
 </head>
 <body>
-    <h1>Declinationes Linguae Latinae</h1>
-    <p>Practice nominative and genitive forms across different declensions and weekly lexis sets.</p>
+    <h1>Základy lékařské terminologie</h1>
+    <p>Vítejte v beta verzii kvízu skloňování anatomických termínů.</p>
 
     <h2>Vyberte si deklinace, které chcete procvičovat:</h2>
     <label><input type="checkbox" class="declensionCheckbox" value="I"> Declinatio I</label><br>
@@ -46,7 +52,7 @@
         <button onclick="submitGuess()">Submit</button>
     </div>
 
-    <p>Last update code: 15:02</p>
+    <p>Last update code: 15:06</p>
 
     <script>
         function handleKeyDown(event) {
@@ -68,7 +74,7 @@
             const selectedWeeks = getSelectedWeeks();
 
             if (selectedDeclensions.length === 0 || selectedWeeks.length === 0) {
-                alert("Please select at least one declension and one week.");
+                alert("Prosím, vyberte alespoň jednu deklinaci a jeden týden.");
                 return;
             }
 
@@ -133,7 +139,7 @@
 
             const filteredWords = wordsData.filter(word => selectedDeclensions.includes(determineDeclension(word)));
             if (filteredWords.length === 0) {
-                alert("No words available for the selected declensions.");
+                alert("Pro vybranou deklinaci nejsou v slovní zásobě žádná slova.");
                 return;
             }
 
@@ -141,8 +147,8 @@
             const randomCase = getRandomElement(cases);
             const randomNumber = getRandomElement(numbers);
 
-            document.getElementById('randomWord').innerText = 'Word: ' + randomWord.word;
-            document.getElementById('randomCaseNumber').innerText = 'Case/Number: ' + randomCase + ' ' + randomNumber;
+            document.getElementById('randomWord').innerText = 'Slovo: ' + randomWord.word;
+            document.getElementById('randomCaseNumber').innerText = 'Pád a číslo: ' + randomCase + ' ' + randomNumber;
 
             currentWord = randomWord;
             currentCase = randomCase;
@@ -153,9 +159,9 @@
             const userGuess = document.getElementById('userGuess').value.toLowerCase();
             const correctAnswer = checkGuess();
             if (userGuess === correctAnswer) {
-                alert("Correct!");
+                alert("Správně!");
             } else {
-                alert("Incorrect. The correct answer is: " + correctAnswer);
+                alert("Nesprávně. Správná odpověď je: " + correctAnswer);
             }
             getRandomWordAndCase();
         }
