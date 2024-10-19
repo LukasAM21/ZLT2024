@@ -23,17 +23,17 @@
     <h1>Declinationes Linguae Latinae</h1>
     <p>Practice nominative and genitive forms across different declensions and weekly lexis sets.</p>
 
-    <h2>Select the declensions you want to practice:</h2>
+    <h2>Vyberte si deklinace, které chcete procvičovat:</h2>
     <label><input type="checkbox" class="declensionCheckbox" value="I"> Declinatio I</label><br>
     <label><input type="checkbox" class="declensionCheckbox" value="II"> Declinatio II</label><br>
     <label><input type="checkbox" class="declensionCheckbox" value="III"> Declinatio III</label><br>
     <label><input type="checkbox" class="declensionCheckbox" value="IV"> Declinatio IV</label><br>
     <label><input type="checkbox" class="declensionCheckbox" value="V"> Declinatio V</label><br>
 
-    <h2>Select the weeks you want to practice:</h2>
-    <label><input type="checkbox" class="weekCheckbox" value="week1">week1</label><br>
-    <label><input type="checkbox" class="weekCheckbox" value="week2">week2</label><br>
-    <label><input type="checkbox" class="weekCheckbox" value="week3">week3</label><br>
+    <h2>Vyberte si týdny, které chcete procvičovat:</h2>
+    <label><input type="checkbox" class="weekCheckbox" value="week1">Týden 1</label><br>
+    <label><input type="checkbox" class="weekCheckbox" value="week2">Týden 2</label><br>
+    <label><input type="checkbox" class="weekCheckbox" value="week3">Týden 3</label><br>
 
 
     <button onclick="startQuiz()">Start Quiz</button>
@@ -86,7 +86,7 @@
             let loadedFiles = 0;
 
             weeks.forEach(week => {
-                const weekFile = week.replace(" ", "").toLowerCase() + '.txt';
+                const weekFile = week.toLowerCase() + '.txt';
                 console.log("Fetching file:", weekFile); // Log the file being fetched
                 fetch(weekFile)
                     .then(response => {
