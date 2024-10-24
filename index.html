@@ -54,7 +54,7 @@
         <button onclick="submitGuess()">Vložit</button>
     </div>
 
-    <p>Last update: 19.10.2024 16:05</p>
+    <p>Last update: 24.10.2024 16:30</p>
 
     <script>
         function endsWithTwoConsonants(word) {
@@ -227,7 +227,7 @@
                         correctForm = currentWord.genitive
                     } else if (currentWord.word === "vas"){
                         correctForm = "vasorum";
-                    } else if (isIStem(currentWord.word) || currentWord.word.endsWith("sis")){
+                    } else if (isIStem(currentWord.word) || currentWord.word.endsWith("sis") || currentWord.word.endsWith("xis")){
                             correctForm = trunk + 'ium';
                         } else if (endsWithTwoConsonants(trunk) || currentWord.word === trunk + "is"){
                             correctForm = trunk + 'ium';
